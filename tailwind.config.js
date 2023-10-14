@@ -8,12 +8,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        'green-dark': '#264653',
+        'green-main': '#2a9d8f',
+        'yellow-main': '#ff9f1c',
         'primary-extra-light': '#f2f9fd',
         'primary-light': '#c5e3f2',
         'primary-main': '#8ecae6',
         'primary-hover': '#58b2d8',
         'primary-focus': '#3298c5',
-        'primary-dark': '#1d6187',
+        'primary-dark': '#112A46',
         'primary-extra-dark': '#1c465e',
         'secondary-light': '#fff9c5',
         'secondary-main': '#fff485',
@@ -30,6 +33,9 @@ module.exports = {
         'error-light': '#ff8b8b',
         'error-main': '#ff4949',
         'error-dark': '#be0000',
+        'grey-light': '#ced4da',
+        'grey-main': '#adb5bd',
+        'grey-dark': '#6c757d',
       },
     },
   },
