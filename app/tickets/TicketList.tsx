@@ -1,7 +1,9 @@
 import { Ticket } from '../models/Ticket'
 
 const getTickets = async () => {
-  const res = await fetch('http://localhost:4000/tickets')
+  const res = await fetch('http://localhost:4000/tickets', {
+    next: { revalidate: 0 },
+  })
   return res.json()
 }
 
@@ -29,7 +31,7 @@ export default async function TicketList() {
                 colorMap[ticket.priority]
               }`}
             >
-              {ticket.priority}
+              {ticket.priority} priority
             </span>
           </div>
         </div>
