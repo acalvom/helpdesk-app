@@ -1,16 +1,12 @@
+import Link from 'next/link'
 import { Ticket } from '../models/Ticket'
+import { API_URL, colorMap } from '../utils/constants'
 
 const getTickets = async () => {
-  const res = await fetch('http://localhost:4000/tickets', {
+  const res = await fetch(`${API_URL}/tickets`, {
     next: { revalidate: 0 },
   })
   return res.json()
-}
-
-const colorMap: any = {
-  low: 'bg-success-main',
-  medium: 'bg-warning-main',
-  high: 'bg-error-main',
 }
 
 export default async function TicketList() {
@@ -18,22 +14,22 @@ export default async function TicketList() {
 
   return (
     <>
-      {tickets.map((ticket: Ticket) => (
+      {tickets.map(({ id, body, priority, title }: Ticket) => (
         <div
-          key={ticket.id}
+          key={id}
           className=" mb-4 bg-primary-extra-light rounded-xl border-2 border-green-main drop-shadow-lg"
         >
-          <h3 className="p-4 text-md text-green-main font-semibold">{ticket.title}</h3>
-          <p className="p-4 text-md text-green-dark">{ticket.body.slice(0, 400)}...</p>
-          <div className="flex flex-row-reverse">
-            <span
-              className={`px-4 py-2 text-xs text-green-dark font-semibold uppercase rounded-tl-lg rounded-br-lg ${
-                colorMap[ticket.priority]
-              }`}
-            >
-              {ticket.priority} priority
-            </span>
-          </div>
+          <Link href={`/tickets/${id}`}>
+            <h3 className="p-4 text-md text-green-main font-semibold">{title}</h3>
+            <p className="p-4 text-md text-green-dark">{body.slice(0, 400)}...</p>
+            <div className="flex flex-row-reverse">
+              <span
+                className={`px-4 py-2 text-xs text-green-dark font-semibold uppercase rounded-tl-lg rounded-br-lg ${colorMap[priority]}`}
+              >
+                {priority} priority
+              </span>
+            </div>
+          </Link>
         </div>
       ))}
     </>
