@@ -1,11 +1,24 @@
 import { Ticket } from '@/app/models/Ticket'
 import { API_URL, colorMap } from '@/app/utils/constants'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
-const getTicketById = async (id: number) => {
+export async function generateStaticParams() {
+  const res = await fetch(`${API_URL}/tickets`)
+  const tickets = await res.json()
+  
+  return tickets.map((ticket: Ticket) => ({
+    id: ticket.id.toString(),
+  }))
+}
+
+async function getTicketById(id: number) {
   const res = await fetch(`${API_URL}/tickets/${id}`, {
     next: { revalidate: 60 },
   })
+
+  if (!res.ok) notFound()
+
   return res.json()
 }
 
