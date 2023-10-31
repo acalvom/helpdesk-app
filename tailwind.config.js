@@ -10,7 +10,10 @@ module.exports = {
       colors: {
         'green-dark': '#264653',
         'green-main': '#2a9d8f',
+        'green-light': '#6bc5ba',
+        'yellow-dark': '#b86c02',
         'yellow-main': '#ff9f1c',
+        'yellow-light': '#fcc77c',
         'primary-extra-light': '#f2f9fd',
         'primary-light': '#c5e3f2',
         'primary-main': '#8ecae6',
