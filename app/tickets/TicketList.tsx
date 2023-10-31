@@ -1,8 +1,11 @@
 import Link from 'next/link'
 import { Ticket } from '../models/Ticket'
 import { API_URL, colorMap } from '../utils/constants'
+import { delay } from '../utils/delay'
 
 const getTickets = async () => {
+  await delay(2000)
+
   const res = await fetch(`${API_URL}/tickets`, {
     next: { revalidate: 0 },
   })

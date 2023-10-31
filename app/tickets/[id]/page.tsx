@@ -1,18 +1,21 @@
 import { Ticket } from '@/app/models/Ticket'
 import { API_URL, colorMap } from '@/app/utils/constants'
+import { delay } from '@/app/utils/delay'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 export async function generateStaticParams() {
   const res = await fetch(`${API_URL}/tickets`)
   const tickets = await res.json()
-  
+
   return tickets.map((ticket: Ticket) => ({
     id: ticket.id.toString(),
   }))
 }
 
 async function getTicketById(id: number) {
+  await delay(2000)
+
   const res = await fetch(`${API_URL}/tickets/${id}`, {
     next: { revalidate: 60 },
   })
